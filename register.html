@@ -137,54 +137,51 @@
             <p class="section-subtitle">* Indicates required question</p>
         </div>
 
-        <form id="myregisterForm" class="entry-form fade-up-scroll" action="https://formspree.io/f/xjybrqjj" method="POST" novalidate>
-            <input type="hidden" name="subject" value="New Mosaic of Us Registration">
-            <input type="hidden" name="from_name" value="The Mosaic of Us — Registration Form">
-            <input type="checkbox" name="botcheck" style="display:none;">
+       <form id="myregisterForm" class="entry-form fade-up-scroll" action="https://formspree.io/f/xjybrqjj" method="POST">
+    <input type="hidden" name="_subject" value="New Mosaic of Us Registration">
+    <input type="text" name="_gotcha" style="display:none !important">
 
-            <div class="form-field">
-                <label for="f-name">Name <span class="required">*</span></label>
-                <input type="text" id="f-name" name="Name" required>
-            </div>
+    <div class="form-field">
+        <label for="f-name">Name <span class="required">*</span></label>
+        <input type="text" id="f-name" name="Name" required>
+    </div>
 
-            <div class="form-field">
-                <label for="f-age">Age <span class="required">*</span></label>
-                <input type="number" id="f-age" name="Age" min="1" max="120" required>
-            </div>
+    <div class="form-field">
+        <label for="f-age">Age <span class="required">*</span></label>
+        <input type="number" id="f-age" name="Age" min="1" max="120" required>
+    </div>
 
-            <div class="form-field">
-                <label for="f-email">E-mail address <span class="required">*</span></label>
-                <input type="email" id="f-email" name="Email" required>
-            </div>
+    <div class="form-field">
+        <label for="f-email">E-mail address <span class="required">*</span></label>
+        <input type="email" id="f-email" name="email" required>
+    </div>
 
-            <div class="form-field">
-                <label for="f-phone">Phone Number <span class="required">*</span></label>
-                <input type="tel" id="f-phone" name="Phone Number" required>
-            </div>
+    <div class="form-field">
+        <label for="f-phone">Phone Number <span class="required">*</span></label>
+        <input type="tel" id="f-phone" name="Phone Number" required>
+    </div>
 
-            <div class="form-field">
-                <label for="f-school">School/College</label>
-                <input type="text" id="f-school" name="School/College">
-            </div>
+    <div class="form-field">
+        <label for="f-school">School/College</label>
+        <input type="text" id="f-school" name="School/College">
+    </div>
 
-            <fieldset class="form-field">
-                <legend>Will you be participating in the Art Exhibition? <span class="required">*</span></legend>
-                <div class="radio-pills">
-                    <label class="radio-pill">
-                        <input type="radio" name="Participating in Art Exhibition" value="Yes" required>
-                        <span>Yes</span>
-                    </label>
-                    <label class="radio-pill">
-                        <input type="radio" name="Participating in Art Exhibition" value="No" required>
-                        <span>No</span>
-                    </label>
-                </div>
-            </fieldset>
+    <fieldset class="form-field">
+        <legend>Will you be participating in the Art Exhibition? <span class="required">*</span></legend>
+        <div class="radio-pills">
+            <label class="radio-pill">
+                <input type="radio" name="Participating in Art Exhibition" value="Yes" required>
+                <span>Yes</span>
+            </label>
+            <label class="radio-pill">
+                <input type="radio" name="Participating in Art Exhibition" value="No" required>
+                <span>No</span>
+            </label>
+        </div>
+    </fieldset>
 
-            
-            <button type="submit" class="btn-primary form-submit">Submit</button>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        </form>
+    <button type="submit" class="btn-primary form-submit">Submit</button>
+</form>
     </section>
 
     <footer class="footer">

@@ -132,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
         renderCursorText();
     }
 
-
     // 2D. Glowing spotlight that follows the pointer inside each block
     if (window.matchMedia('(pointer: fine)').matches) {
         document.querySelectorAll('.atelier-card').forEach(block => {
@@ -146,11 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2E. Team scene — each invisible hitzone toggles a "hovered" class on
-    // its matching person, so that person alone zooms in and gets a gold
-    // outline glow. cursor-text (already generic on desktop) reads their
-    // name off the same hitzone's data-cursor-text attribute; on touch
-    // devices we drive it explicitly since there's no hover/mousemove.
+    // 2E. Team scene touch and hover handlers
     const teamScene = document.getElementById('teamScene');
     const cursorTextEl = document.querySelector('.cursor-text');
     let activeTouchTarget = null;
@@ -175,7 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = targetId ? document.getElementById(targetId) : null;
         if (!target) return;
 
-        // Desktop: mouse hover
         zone.addEventListener('mouseenter', () => {
             target.classList.add('hovered');
         });
@@ -183,7 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
             target.classList.remove('hovered');
         });
 
-        // Touch devices: tap to zoom + show name, tap again / tap elsewhere to reset
         zone.addEventListener('touchstart', (event) => {
             event.stopPropagation();
             if (activeTouchTarget && activeTouchTarget !== target) {
@@ -204,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, { passive: true });
     });
 
-    // Tapping outside the collage (or anywhere else on the page) resets it
     if (teamScene) {
         document.addEventListener('touchstart', (event) => {
             if (!activeTouchTarget) return;
@@ -361,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // 9. Paint splash reveal — appears once as its section scrolls into view
+    // 9. Paint splash reveal
     document.querySelectorAll('.paint-splash').forEach((splash, i) => {
         gsap.to(splash, {
             opacity: 1,
@@ -374,7 +366,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 once: true
             },
             onComplete: () => {
-                // Bobbing loop animation after entrance
                 gsap.to(splash, {
                     y: "+=12",
                     rotation: "+=3",
@@ -425,8 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // 10. Soft image-mask reveal for the team photo scene — a gentle
-    // scale + fade in as it scrolls into view, once.
+    // 10. Team photo scene reveal
     const scene = document.getElementById('teamScene');
     if (scene) {
         gsap.fromTo(scene,
@@ -475,46 +465,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-    // 11. Registration form — submits to Formspree via fetch so the visitor
-    // stays on this page and sees a styled confirmation instead of being
-    // redirected.
-    const registerForm = document.getElementById('myregisterForm');
-    if (registerForm) {
-        const statusEl = document.getElementById('formStatus');
-
-        registerForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const submitBtn = registerForm.querySelector('.form-submit');
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending…';
-            statusEl.textContent = '';
-            statusEl.className = 'form-status';
-
-            try {
-                const formData = new FormData(registerForm);
-                const response = await fetch(registerForm.action, {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: formData
-                });
-
-                if (response.ok) {
-                    statusEl.textContent = "You're registered! The team will be in touch soon.";
-                    statusEl.className = 'form-status success';
-                    registerForm.reset();
-                } else {
-                    const result = await response.json();
-                    throw new Error(result.error || 'Submission failed');
-                }
-            } catch (err) {
-                statusEl.textContent = 'Something went wrong — please try again or reach out directly.';
-                statusEl.className = 'form-status error';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit';
-            }
-        });
-    }
+    // 11. Registration form handler
+    // Native HTML form redirection enabled (JavaScript submit listener removed).
 });
